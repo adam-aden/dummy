@@ -1,11 +1,32 @@
 print("this is bmi claculater")
+while True:
+    name = input("enter name")
+    if name:
+        print()
+        break
+    else:
+        print("enter again")
 
-name = input("enter name")
-weight = float(input("enter weight"))
-height = float(input("enter height"))
+while True:
+    try:
+        weight = float(input("enter weight"))
+        break
+    except ValueError:
+            print("enter again")
+
+while True:
+    try:
+        height = float(input("enter height"))
+        break
+    except ValueError:
+            print("enter again")
 
 bmi = weight / (height / 100) **2
+print(f"hi {name}")
+print()
+
 print(f"your bmi is {bmi:.2f}")
+print()
 
 if bmi < 18.5:
     print("skinny")
