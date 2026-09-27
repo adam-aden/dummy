@@ -1,7 +1,11 @@
 import tkinter as tk
 
+backg       = "#DDDDE0"
+welcometext = "#1D6A96"
+
 root = tk.Tk()
 root.title("notes")
+root.configure(bg=backg)
 
 notes = []
 
@@ -16,19 +20,25 @@ def load_notes():
     except FileNotFoundError:
         notes = []
         save_notes()
-    refresh_list_gui()
+    refresh_list_gui() #this line can add space but I didn't and it worked
+
+#load_notes is read("r") from old notes
+#if don't have it, new notes will show up
 
 def save_notes():
     with open("test_note.txt", "w", encoding="utf-8") as file:
         for note in notes:
             file.write(note + "\n")
 
+#self_notes is open notes and write("w") on it
+
 def refresh_list_gui():
     showlist.delete(0, tk.END)  
     for note in notes: 
         showlist.insert(tk.END, note)
 
-
+#refrech_list_gui is delete all data off notes then
+#then get new data from notes and show
 
 def add_note():
     text = entry.get().strip()
@@ -61,6 +71,9 @@ def edit_note():
         save_notes()
         refresh_list_gui()
 
+#edit_note is get notes index then sent to entry(ui)
+#and then save to notes then show to ui 
+
 def seleted_note(event=None):
     seleted = showlist.curselection()
     if seleted:
@@ -68,16 +81,21 @@ def seleted_note(event=None):
         entry.delete(0, tk.END)
         entry.insert(0, notes[index])
 
+#UI
+label = tk.Label(root, text="\n", bg=backg)  #I add space
+label.pack()
+
+welcome = tk.Label(root, text="welcome 2 my note", fg=welcometext, bg="pink")
+welcome.place(x=625, y = 10)
 
 
-showlist = tk.Listbox(root, width=50, height=20)
+showlist = tk.Listbox(root, width=70, height=30)
 showlist.pack()
 
-entry = tk.Entry(root, width=50)
+entry = tk.Entry(root, width=70)
 entry.pack()
 
-
-
+#button
 add_button = tk.Button(root, text="Add Notes", command=add_note)
 add_button.pack()
 
